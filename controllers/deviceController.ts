@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 const { Device, DeviceInfo } = require("../models/models");
-const ApiError2 = require("../error/ApiError");
+//const ApiError2 = require("../error/ApiError");
 import { Request, Response, NextFunction } from "express";
 class DeviceController {
   async create(req: any, res: any, next: any) {
@@ -31,7 +31,7 @@ class DeviceController {
       }
       return res.json(device);
     } catch (e: any) {
-      next(ApiError2.badRequest(e.message));
+      next();
     }
   }
 

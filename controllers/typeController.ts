@@ -1,5 +1,5 @@
 const { Type } = require("../models/models");
-const ApiError = require("../error/ApiError");
+//const ApiError = require("../error/ApiError");
 import { Request, Response, NextFunction } from "express";
 class TypeController {
   async create(req: any, res: any) {

@@ -1,4 +1,4 @@
-const ApiError1 = require("../error/ApiError");
+//const ApiError1 = require("../error/ApiError");
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,13 +14,11 @@ class UserController {
   async registration(req: Request, res: Response, next: NextFunction) {
     const { email, password, role } = req.body;
     if (!email || !password) {
-      return next(ApiError1.badRequest("Некорректный email или password"));
+      return next();
     }
     const candidate = await User.findOne({ where: { email } });
     if (candidate) {
-      return next(
-        ApiError1.badRequest("Пользователь с таким email уже существует")
-      );
+      return next();
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const user = await User.create({ email, role, password: hashPassword });
@@ -33,11 +31,11 @@ class UserController {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return next(ApiError1.internal("Пользователь не найден"));
+      return next();
     }
     let comparePassword = bcrypt.compareSync(password, user.password);
     if (!comparePassword) {
-      return next(ApiError1.internal("Указан неверный пароль"));
+      return next();
     }
     const token = generateJwt(user.id, user.email, user.role);
     return res.json({ token });
