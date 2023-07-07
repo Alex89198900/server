@@ -4,7 +4,7 @@ const PORT__DEV = 3333;
 const sequelize = require("./db");
 import cors from "cors";
 const router = require("./routes/index");
-const errorHandler = require("./middleware/ErrorHandlingMiddleware");
+//const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 const path = require("path");
 import fileUpload from "express-fileupload";
 const app = express();
@@ -19,7 +19,7 @@ app.use("/api", router);
 // });
 
 // Обработка ошибок, последний Middleware
-app.use(errorHandler);
+//app.use(errorHandler);
 
 const start = async () => {
   try {
